@@ -1,10 +1,13 @@
 $("input:text:visible:first").focus();
 
+$('.terminal-cols').click(function(event){
+	$("input:text:visible:first").focus();
+});
+
 $('input').keypress(function(event){
 	var keycode = (event.keyCode ? event.keyCode : event.which);
 	if(keycode == '13'){
 		var value = $('input').val();
-		// console.log(value);
 		$('input').val('');
 		checkValue(value.toLowerCase(), value);
 		var objDiv = $('table')[0];
