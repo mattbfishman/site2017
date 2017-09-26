@@ -43,7 +43,8 @@ $('input').keypress(function(event){
 	if(keycode == '13'){
 		var value = $('input').val();
 		$('input').val('');
-		checkValue(value.toLowerCase().replace(/ /g, ''), value);
+		console.log(value.toLowerCase().replace(/\s/g, ''));
+		checkValue(value.toLowerCase().replace(/\s/g, ''), value);
 		var objDiv = $('table')[0];
 		objDiv.scrollTop = objDiv.scrollHeight;
 	}
@@ -85,7 +86,7 @@ function checkValue(inputValue, inputValueNonLowercase){
 	else if(inputValue == "resume"){
 		makeTr('> <a href="./files/Fishman_Matthew_Resume.pdf" target="_blank">Matt Fishman\'s Resume</a>', 'help');
 	}
-	else if(inputValue == "current role"){
+	else if(inputValue == "currentrole"){
 		makeTr('> Software Engineer at Fiber Mountain since February 2017', 'help');
 	}
 	else{
