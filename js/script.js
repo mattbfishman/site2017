@@ -1,15 +1,49 @@
+var recCommands = ['clear', 'help', 'name', 'origin', 'degree', 'education', 'resume', 'current role'];
+
 $("input:text:visible:first").focus();
 
 $('.terminal-cols').click(function(event){
 	$("input:text:visible:first").focus();
 });
 
+$("input").on( 'keydown', function( e ) {
+    if( e.which == 9 ) {
+        e.preventDefault();
+        var value = $('input').val();
+        var temp = [];
+        for(var i = 0; i < recCommands.length; i++){
+        	if(value.length < recCommands[i].length){
+        		var substring = recCommands[i].substring(0, value.length);
+        		if(substring.indexOf(value) != -1){
+        			temp.push(recCommands[i]);
+        		}
+        	}
+        }
+        if(temp.length == 1){
+        	$('input').val(temp[0] + " "); 
+        }
+        else{
+        	var message = '';
+        	for(var i = 0; i < temp.length; i++){
+        		if(i == 0){
+        			message = temp[i];
+        		}
+        		else{
+        			message = message + '<span class="spacing">&emsp;</span>' + temp[i];
+        		}
+        	}
+        	console.log(message);
+        	makeTr(message, 'tab');
+        }
+    }
+} );
+
 $('input').keypress(function(event){
 	var keycode = (event.keyCode ? event.keyCode : event.which);
 	if(keycode == '13'){
 		var value = $('input').val();
 		$('input').val('');
-		checkValue(value.toLowerCase(), value);
+		checkValue(value.toLowerCase().replace(/ /g, ''), value);
 		var objDiv = $('table')[0];
 		objDiv.scrollTop = objDiv.scrollHeight;
 	}
@@ -23,128 +57,47 @@ function checkValue(inputValue, inputValueNonLowercase){
 	tr.appendChild(td);
 	$('table tr:last').before(tr);
 	if(inputValue == "help"){
-		var tr = document.createElement("tr");
-		var td = document.createElement("td");
-		$(td).html('> List of Recognized Commands: ');
-		$(td).attr('class', 'terminal-help-message-td');
-		tr.appendChild(td);
-		$('table tr:last').before(tr);
-
-		tr = document.createElement("tr");
-		td = document.createElement("td");
-		$(td).html('=> Clear');
-		$(td).attr('class', 'terminal-help-inner-message-td');
-		tr.appendChild(td);
-		$('table tr:last').before(tr);
-
-		tr = document.createElement("tr");
-		td = document.createElement("td");
-		$(td).html('=> Help');
-		$(td).attr('class', 'terminal-help-inner-message-td');
-		tr.appendChild(td);
-		$('table tr:last').before(tr);
-
-		tr = document.createElement("tr");
-		td = document.createElement("td");
-		$(td).html('=> Name');
-		$(td).attr('class', 'terminal-help-inner-message-td');
-		tr.appendChild(td);
-		$('table tr:last').before(tr);
-
-		tr = document.createElement("tr");
-		td = document.createElement("td");
-		$(td).html('=> Origin');
-		$(td).attr('class', 'terminal-help-inner-message-td');
-		tr.appendChild(td);
-		$('table tr:last').before(tr);
-
-		tr = document.createElement("tr");
-		td = document.createElement("td");
-		$(td).html('=> Degree');
-		$(td).attr('class', 'terminal-help-inner-message-td');
-		tr.appendChild(td);
-		$('table tr:last').before(tr);
-
-		tr = document.createElement("tr");
-		td = document.createElement("td");
-		$(td).html('=> Education');
-		$(td).attr('class', 'terminal-help-inner-message-td');
-		tr.appendChild(td);
-		$('table tr:last').before(tr);
-
-		tr = document.createElement("tr");
-		td = document.createElement("td");
-		$(td).html('=> Resume');
-		$(td).attr('class', 'terminal-help-inner-message-td');
-		tr.appendChild(td);
-		$('table tr:last').before(tr);
-
-		tr = document.createElement("tr");
-		td = document.createElement("td");
-		$(td).html('=> Current Role');
-		$(td).attr('class', 'terminal-help-inner-message-td');
-		tr.appendChild(td);
-		$('table tr:last').before(tr);
+		makeTr('=> List of Recognized Commands: ', 'help');
+		makeTr('=> Clear', 'help-inner');
+		makeTr('=> Help', 'help-inner');
+		makeTr('=> Name', 'help-inner');
+		makeTr('=> Origin', 'help-inner');
+		makeTr('=> Degree', 'help-inner');
+		makeTr('=> Education', 'help-inner');
+		makeTr('=> Resume', 'help-inner');
+		makeTr('=> Current Role', 'help-inner');
 	}
 	else if(inputValue == "clear"){
 		$("table tr:not(:last-child)").empty();
 	}
 	else if(inputValue == "name"){
-		var tr = document.createElement("tr");
-		var td = document.createElement("td");
-		$(td).html('> Matthew Brandon Fishman');
-		$(td).attr('class', 'terminal-help-message-td');
-		tr.appendChild(td);
-		$('table tr:last').before(tr);
+		makeTr('> Matthew Brandon Fishman', 'help');
 	}
 	else if(inputValue == "origin"){
-		var tr = document.createElement("tr");
-		var td = document.createElement("td");
-		$(td).html('> Manalapan, NJ');
-		$(td).attr('class', 'terminal-help-message-td');
-		tr.appendChild(td);
-		$('table tr:last').before(tr);
+		makeTr('> Manalapan, NJ', 'help');
 	}
 	else if(inputValue == "education"){
-		var tr = document.createElement("tr");
-		var td = document.createElement("td");
-		$(td).html('> Quinnipiac University');
-		$(td).attr('class', 'terminal-help-message-td');
-		tr.appendChild(td);
-		$('table tr:last').before(tr);
+		makeTr('> Quinnipiac University', 'help');
 	}
 	else if(inputValue == "degree"){
-		var tr = document.createElement("tr");
-		var td = document.createElement("td");
-		$(td).html('> B.S. in Software Engineering');
-		$(td).attr('class', 'terminal-help-message-td');
-		tr.appendChild(td);
-		$('table tr:last').before(tr);
+		makeTr('> B.S. in Software Engineering', 'help');
 	}
 	else if(inputValue == "resume"){
-		var tr = document.createElement("tr");
-		var td = document.createElement("td");
-		$(td).html('> <a href="./files/Fishman_Matthew_Resume.pdf" target="_blank">Matt Fishman\'s Resume</a>');
-		$(td).attr('class', 'terminal-help-message-td');
-		tr.appendChild(td);
-		$('table tr:last').before(tr);
+		makeTr('> <a href="./files/Fishman_Matthew_Resume.pdf" target="_blank">Matt Fishman\'s Resume</a>', 'help');
 	}
 	else if(inputValue == "current role"){
-		var tr = document.createElement("tr");
-		var td = document.createElement("td");
-		$(td).html('> Software Engineer at Fiber Mountain since February 2017');
-		$(td).attr('class', 'terminal-help-message-td');
-		tr.appendChild(td);
-		$('table tr:last').before(tr);
+		makeTr('> Software Engineer at Fiber Mountain since February 2017', 'help');
 	}
 	else{
-		var tr = document.createElement("tr");
-		var td = document.createElement("td");
-		$(td).html('> Command not found. Try Again');
-		$(td).attr('class', 'terminal-system-message-td');
-		tr.appendChild(td);
-		$('table tr:last').before(tr);
+		makeTr('> Command not found. Try Again', 'system');
 	}
+}
 
-
+function makeTr(message, termClass){
+	var tr = document.createElement("tr");
+	var td = document.createElement("td");
+	$(td).html(message);
+	$(td).attr('class', 'terminal-'+termClass+'-message-td');
+	tr.appendChild(td);
+	$('table tr:last').before(tr);
 }

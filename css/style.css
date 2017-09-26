@@ -38,7 +38,7 @@ input:focus{
 }
 
 .spacing{
-	width: 10px;
+	width: 30px;
 }
 
 .terminal-string-td{
@@ -101,13 +101,18 @@ input:focus{
 	margin-top: 20px;
 }
 
-.terminal-help-message-td{
+.terminal-help-message-td,
+.terminal-tab-message-td{
 	color: #00ff00;
 }
 
 .terminal-help-inner-message-td{
 	color: #00ff00;
 	padding-left: 60px !important;
+}
+
+.fa.fa-linkedin-square{
+	margin-right: 10px;
 }
 
 @media only screen and (min-width: 1000px) {
