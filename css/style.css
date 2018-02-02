@@ -115,6 +115,46 @@ input:focus{
 	margin-right: 10px;
 }
 
+.paddle{
+	display: block;
+    background-color: red;
+    width: 100px;
+    height: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 43.5%;
+}
+
+.ball{
+    position: absolute;
+    background-color: green;
+    height: 10px;
+    width: 10px;
+    display: block;
+    top: 75%;
+    left: 49%;
+    border-radius: 100px;
+}
+
+.bricks{
+	word-wrap: break-word;
+    text-align: center;
+}
+
+.startText{
+    color: white;
+    position: absolute;
+    top: 60%;
+    font-size: 22px;
+    left: 30%;
+}
+
+#backgroundCanvas{
+	border-top: gray 20px solid;
+	opacity: .9;
+	margin-bottom: -5px;
+}
+
 @media only screen and (min-width: 1000px) {
 
 	.header-h1::after{
